@@ -24,11 +24,12 @@ services:
     networks:
       - mynetwork
 
-
   angular-frontend:
     image: angular-frontend
     container_name: angular-frontend
-    build: ./Front-End
+    build: 
+      context: ./Front-End
+      dockerfile: Dockerfile
     ports:
       - "4200:4200"
     depends_on:
@@ -36,11 +37,11 @@ services:
     networks:
       - mynetwork
     environment:
-      - API_BASE_URL=http://api-gateway:8081
-      - CHOKIDAR_USEPOLLING=true # Pour surveiller les fichiers sous Docker
-
-
-
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./Front-End:/app
+      - /app/node_modules
 
   db:
     image: mysql:8
