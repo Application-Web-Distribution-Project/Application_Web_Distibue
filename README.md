@@ -1,94 +1,105 @@
-# Système de Gestion des Réclamations - Restaurant Management Platform 
+# Restaurant Management Platform - Microservices Architecture
 
-## Vue d'ensemble
-Microservice de gestion des réclamations intégré dans une plateforme de gestion de restaurant, permettant le suivi et le traitement des réclamations clients.
-
-## Architecture Technique
-- **Frontend**: Angular (port 4200)
-- **Backend**: Spring Boot Microservice (port 8082)
-- **Database**: MySQL 8 (port 3307)
-- **Service Registry**: Eureka Server (port 8761)
-- **API Gateway**: Spring Cloud Gateway (port 8081)
-
-## Caractéristiques Principales
-- Soumission et suivi des réclamations
-- Notification par email automatique
-- Interface admin pour la gestion
-- Intégration avec le service de commandes et le service User
-
-## Démarrage Rapide
-```bash
-docker-compose up -d
-```
-
-## Endpoints API
-- POST /api/reclamations - Créer une réclamation
-- GET /api/reclamations - Lister les réclamations
-- PUT /api/reclamations/{id} - Mettre à jour une réclamation
-- DELETE /api/reclamations/{id} - Supprimer une réclamation
-
-## Configuration Email
-```properties
-SMTP Host: smtp.gmail.com
-SMTP Port: 587
-Email: Marwaniwael88@gmail.com
-```
-
-## Structure Docker
-- Conteneur Frontend (Angular)
-- Conteneur Backend (Spring Boot)
-- Conteneur MySQL
-- Conteneur Eureka
-- Conteneur API Gateway
-
-## Sécurité
-- Authentification requise
-- Communication inter-services sécurisée
-- Validation des données entrantes
-
-## Guide de Déploiement Git avec Submodules
-
-### 1. Initialisation des Submodules (Première fois)
-```bash
-# Initialiser les submodules
-git submodule init
-git submodule update
-```
-
-### 2. Mise à jour des Submodules
-```bash
-# Pour chaque submodule (API_Gateway, Eureka-Server, Front-End, Reclamation_Service)
-cd [nom-du-submodule]
-git checkout master
-git pull origin master
-git add .
-git commit -m "Update submodule: [description des changements]"
-git push origin master
-cd ..
-```
-
-### 3. Mise à jour du Projet Principal
-```bash
-# Depuis le répertoire racine
-git add .
-git commit -m "Update project with submodules changes"
-git push origin master
-```
-
-### 4. Vérification du Statut
-```bash
-# Vérifier le statut des submodules
-git submodule status
-
-# Mettre à jour tous les submodules d'un coup
-git submodule update --remote --merge
-```
-
-### 5. Cloner le Projet avec Submodules (Pour nouveaux développeurs)
-```bash
-git clone --recursive https://github.com/Application-Web-Distribution-Project/Application_Web_Distibue.git
-```
+## 🍽️ Overview
+A comprehensive restaurant management platform built using modern microservices architecture, designed to handle all restaurant operations including user management, menu offerings, order processing, delivery management, complaint handling, and automated notifications.
 
 
 
-## Created By AymenJallouli
+### Core Components
+- **Config Server** (port 8888): Centralized configuration management
+- **Eureka Server** (port 8761): Service registry and discovery
+- **API Gateway** (port 8081): Unified entry point for all client requests
+- **Frontend Angular** (port 4200): Web application for users and administrators
+
+### Microservices
+- **User Service** (port 8083): User management and authentication with JWT
+- **Menu Service** (port 8084): Restaurant menu management with weather-based recommendations
+- **Commande Service** (port 8090): Order processing and management
+- **Livraison Service** (port 8085): Delivery management and tracking
+- **Reclamation Service** (port 8082): Customer complaint handling
+- **Notification Service** (port 8091): Real-time notifications via email
+
+### Infrastructure Services
+- **Kafka & Zookeeper** (ports 9092, 2181): Message broker for async communication
+- **Prometheus & Grafana** (ports 9090, 3005): Monitoring and visualization
+- **Databases**:
+  - MongoDB (port 27017): For user and order data
+  - MySQL (port 3307): For complaints management
+  - PostgreSQL (port 5432): For delivery management
+  - H2 Database (port 8092): For menu data
+
+## 🔒 Security
+- JWT-based authentication and authorization
+- Microservices-specific security configurations
+- Secure inter-service communication via Feign clients
+- CORS configuration for frontend-backend communication
+
+## 🚀 Features
+- **User Management**: Registration, authentication, role-based access control
+- **Menu Management**: Dynamic menu with weather-based food recommendations
+- **Order Processing**: Secure ordering system with payment integration
+- **Delivery Tracking**: Real-time delivery status updates
+- **Complaint Handling**: Customer support with status tracking
+- **Notifications**: Real-time email alerts for orders, deliveries, and complaints
+
+## 🔧 Technologies
+- **Backend**: 
+  - Spring Boot, Spring Cloud, Spring Security
+  - Node.js (Express) for Notification Service
+  - JWT for authentication
+  - Feign clients for inter-service communication
+  
+- **Frontend**: Angular, Bootstrap, RxJS
+
+- **Data Storage**: 
+  - MongoDB
+  - MySQL
+  - PostgreSQL
+  - H2 Database
+
+- **DevOps**:
+  - Docker & Docker Compose
+  - Prometheus & Grafana for monitoring
+
+- **Messaging**:
+  - Kafka for asynchronous communication
+
+## 📋 Getting Started
+
+### Prerequisites
+- Docker and Docker Compose
+- JDK 17+
+- Node.js 16+
+- Maven
+
+
+
+ Access the application:
+- Frontend: http://localhost:4200
+- API Gateway: http://localhost:8081
+- Eureka Dashboard: http://localhost:8761
+- Grafana Dashboard: http://localhost:3005 (admin/admin)
+
+
+## 📊 Monitoring
+- Prometheus is configured to scrape metrics from all services
+- Grafana dashboards are available for visualizing service performance
+- Health endpoints available at `/actuator/health` for each service
+
+## 🔄 API Documentation
+- API Gateway routes all requests to appropriate microservices
+- Swagger documentation available at `/swagger-ui.html` for each service
+
+## 🤝 Contribution Guidelines
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add some amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
+5. Open a pull request
+
+
+
+## 👨‍💻 Created By
+Aymen Jallouli
+
+
